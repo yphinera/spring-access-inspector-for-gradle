@@ -21,4 +21,4 @@ Compile the code:
 
 Run the code and give it your pom build.gradle path:
 
-`gradle run -Pargs="C:\\workspace\\datx-monorepo\\api\\datx-extract-api\\infra"`
+`gradle run -Pargs="/the_path/where/poms/are"`
