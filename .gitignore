@@ -3,6 +3,12 @@
 
 !/**/.gitkeep
 
+.gradle
+build/
+!gradle/wrapper/gradle-wrapper.jar
+!**/src/main/**/build/
+!**/src/test/**/build/
+
 .idea/*
 */.idea/*
 
@@ -18,3 +24,5 @@
 .aws/credentials
 .vscode/*
 target
+
+table.html

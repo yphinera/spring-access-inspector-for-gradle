@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.Stream;
-import java.lang.annotation.Annotation;
 
 import org.apache.logging.log4j.Level;
 import org.apache.logging.log4j.core.config.Configurator;
@@ -42,10 +41,10 @@ public class PreAuthorizeAnalysis implements Callable<Integer>, AnnotationEvent 
 
     @Override
     public Integer call() throws Exception {
-        try (Stream<File> walk = findPoms(projectDirectory)) { // For all maven projects found in directory
+        try (Stream<File> walk = findGradleFiles(projectDirectory)) { // For all gradle projects found in directory
             List<AnnotationsDto> annotations = new ArrayList<>();
-            walk.forEach(pomFile -> {
-                CtModel astModel = ASTReader.readAst(pomFile); // Analyze JAVA AST
+            walk.forEach(gradleFile -> {
+                CtModel astModel = ASTReader.readAst(gradleFile); // Analyze JAVA AST
                 List<AnnotationsDto> temporaryAnnotation = PreAuthorizeAnnotationProcessing
                         .visitAllAnnotations(astModel, this);
                 annotations.addAll(temporaryAnnotation);
@@ -84,10 +83,10 @@ public class PreAuthorizeAnalysis implements Callable<Integer>, AnnotationEvent 
         }
     }
 
-    public static Stream<File> findPoms(String basePath) throws IOException {
+    public static Stream<File> findGradleFiles(String basePath) throws IOException {
         // noinspection resource
         return Files.walk(Paths.get(basePath))
-                .filter(path -> path.getFileName().toString().contains("pom.xml"))
+                .filter(path -> path.getFileName().toString().contains("build.gradle"))
                 .map(Path::toFile);
     }
 

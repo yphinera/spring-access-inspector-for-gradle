@@ -1,4 +1,4 @@
-## What is spring-access-control ?
+## What is spring-access-inspector-for-gradle ?
 
 This tool creates a table report to verify access control on Spring Boot routes.
 It uses the [`Preauthorize`, `Secured` or `RolesAllowed`](https://www.baeldung.com/spring-security-method-security) annotation from `spring-security-config`
@@ -10,19 +10,15 @@ It creates a table.html file with a list of your routes and their preauthorize.
 ## How to use it
 
 Clone the repository:
-`git clone git@github.com:marine-mb/spring-access-inspector.git`
+`git clone https://github.com/yphinera/spring-access-inspector-for-gradle.git`
 
 Go inside the repo:
-`cd spring-access-inspector`
+`cd spring-access-inspector-for-gradle`
 
 Compile the code:
 
-`mvn compile exec:java -Dexec.mainClass=com.theodo.tools.preauthorize.analyzer.PreAuthorizeAnalysis`
+`gradle build`
 
-Run the code (using maven exec plugin) and give it your pom path:
+Run the code and give it your pom build.gradle path:
 
-`mvn exec:java -Dexec.mainClass=com.theodo.tools.preauthorize.analyzer.PreAuthorizeAnalysis  -Dexec.args="/the_path/where/poms/are"`
-
-N.B: Compile your code before:
-
-`mvn clean install -DskipTests`
+`gradle run -Pargs="C:\\workspace\\datx-monorepo\\api\\datx-extract-api\\infra"`
